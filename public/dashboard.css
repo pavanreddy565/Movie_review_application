@@ -1,0 +1,104 @@
+*, *::after, *::before{
+    padding:0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+.wrap{
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    gap:1.5em;
+}
+.dashboard{
+    width: 40%;
+    padding: 2.5em;
+    display: flex;
+    flex-direction: column;
+    gap:1.5em;
+    justify-content: center;
+    align-items: center;
+
+}
+.search_bar{
+    width: 60%;
+    display: flex;
+    background-color: white;
+    padding: 4px 6px;
+    
+    border-radius: 2em;
+    border: 1px solid black;
+  }
+  .search_bar input[type="text"]{
+    width: 80%;
+    margin-left: 5px;
+    padding: 3px;
+    font-size: 1em;
+    border: transparent;
+    /* text-align: center; */
+    
+  }.search_bar input[type="text"]:focus{
+    outline: transparent;
+  }
+  .search_bar button{
+    background-color: transparent;
+    border: 0px;
+    padding: 3px;
+    font-size: .8em;
+  }
+img {
+    max-width: 100%;
+}
+.movies{
+    width: 60%;
+    background: hsl(255, 40%, 8%);
+    display: grid;
+    place-items: center;
+}
+.gallery {
+    --img-size: calc(100px - .5rem / 2);
+    display: grid;
+    gap: .5rem;
+    grid-template-columns: repeat(6, var(--img-size));
+    grid-template-rows: repeat(3, var(--img-size));
+}
+.gallery img {
+        width: 100%;
+        aspect-ratio: 1;
+    /*     height: 100%; */
+        object-fit: cover;
+        grid-column: span 2;
+        border-radius: .5rem;
+        clip-path: path('M 80 20 C 100 0 100 0 120 20 C 140 40 160 60 180 80 C 200 100 200 100 180 120 C 160 140 140 160 120 180 C 100 200 100 200 80 180 C 60 160 40 140 20 120 C 0 100 0 100 20 80 Z');
+        transition: 
+          filter 500ms,
+          clip-path 500ms;
+}
+.gallery img:nth-of-type(4) {
+    grid-column: 2 / span 2;
+  }
+.gallery img:hover {
+    z-index: 100;
+    clip-path: path('M 0 0 C 100 0 100 0 200 0 C 200 50 200 50 200 80 C 200 100 200 100 200 120 C 200 150 200 150 200 200 C 100 200 100 200 0 200 C 0 150 0 150 0 120 C 0 100 0 100 0 80 Z');
+  }    
+.gallery img:not(:hover) {
+    animation: zIndexHack 500ms;
+  }
+  .gallery:hover > img {
+    filter: brightness(.5) saturate(.5);
+  }
+  
+  .gallery > img:hover {
+    filter: brightness(1) saturate(1.5);
+  }
+  
+  
+  @keyframes zIndexHack {
+    0%, 100% {
+      z-index: 10;
+    }
+  }

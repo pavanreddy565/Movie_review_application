@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details</title>
+    <style>
+        *, *::after,*::before{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        #movie-details{
+            width: 100vw;
+            height: 100vh;
+            background-color: #061227;
+            color:white;
+        }#image{
+            padding: 2em;
+            display: flex;
+            /* border: 5px solid white; */
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap:1em;
+            width: 40%;
+        }
+        .rating{
+            background-color: rgba(0,0,0,.5);
+            padding: 1.5em 2em;
+            border-radius: 1em; 
+            display: flex;
+            flex-direction: column;
+            gap:1em;
+        }
+        #title{
+            padding: 2em;
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            width: 60%;
+        }
+    </style>
+</head>
+<body>
+    <div id="movie-details" style="display: flex;">
+        <div id="image" >
+            <img src="<%= details.Poster %>" alt="<%= details.Title %> Poster" style="max-width: 100%;">
+            <div class="rating" >
+                <h2 style="text-align: center;margin-bottom: 3px;"><strong>Ratings</strong></h2>
+                <% if (details.Ratings && details.Ratings[1]) { %>
+                    <div style="display: flex; gap: 5px; align-items: center;">
+                        <div><img src="tomato.png" alt="tomato" width="20px" height="20px"></div>
+                        <p><strong><%= details.Ratings[1].Source %>:</strong> <%= details.Ratings[1].Value %></p>
+                    </div>
+                <% } %>
+                
+                <div style="display: flex; gap: 5px; align-items: center;">
+                    <div style="display: flex; "><img src="imdb.png" alt="imdb" width="20px" height="20px"></div>
+                    <p><strong>IMDB:</strong>   <%= details.imdbRating %></p>
+                </div>
+            </div>
+        </div>
+        <div id="title" style="flex: 1;">
+            <h1><%= details.Title %></h1>
+            <p><strong>Year:</strong> <%= details.Year %></p>
+            <p><strong>Rated:</strong> <%= details.Rated %></p>
+            <p><strong>Released:</strong> <%= details.Released %></p>
+            <p><strong>Runtime:</strong> <%= details.Runtime %></p>
+            <p><strong>Genre:</strong> <%= details.Genre %></p>
+            <p><strong>Director:</strong> <%= details.Director %></p>
+            <p><strong>Writer:</strong> <%= details.Writer %></p>
+            <p><strong>Actors:</strong> <%= details.Actors %></p>
+            <p><strong>Plot:</strong> <%= details.Plot %></p>
+            <p><strong>Language:</strong> <%= details.Language %></p>
+            <p><strong>Country:</strong> <%= details.Country %></p>
+            <p><strong>Awards:</strong> <%= details.Awards %></p>
+        </div>
+        
+    </div>
+</body>
+</html>

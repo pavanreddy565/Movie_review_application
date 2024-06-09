@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+        }
+    </style>
+    
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="dashboard">
+            <h1>Welcome, <%= username %>!</h1>
+           <div>
+            <p>You have successfully logged in.</p>
+            <p>search bellow for movies</p>
+           </div>
+            <div class="search_bar">
+                
+                <input type="text" placeholder="Search" id="moviename">
+                <button id="search" type="submit"><i class="fa fa-search"></i></button>
+            </div>
+        </div>
+        <div class="movies">
+            <article class="gallery">
+                <img src="https://marudzenie.pl/wp-content/uploads/2013/11/6925401_3.jpg" alt="the shawshank redemption">
+                <img src="https://www.legendary.com/wp-content/uploads/2015/04/film_thedarkknight_featureimage_desktop_1600x9001-414x621.jpg" alt="the dark knight">
+                <img src="game of thrones.jpg" alt="Game of Thrones">
+                <img src="https://pbs.twimg.com/media/FwVJKEuaIAADl_z.jpg" alt="mission impossible dead reckoning">
+                <img src="avatar.jpg" alt="avatar">
+                <img src="harry potter.jpg" alt="harry potter">
+                <img src="wensday.jpg" alt="wednesday">
+                <img src="lord of rings.jpg" alt="lord of rings">
+            </article>
+        </div>
+    </div>
+    <script>
+        document.getElementById("search").addEventListener("click", () => {
+    const movieName = document.getElementById("moviename").value;
+    
+    
+});
+    // Function to handle image click
+        function handleImageClick(event) {
+            const altText = event.target.alt;
+            fetch('/search', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ moviename: altText }),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to search');
+                }
+                return response.json();
+            })
+            .then(data => {
+                window.location.href = `/search?moviename=${encodeURIComponent(data.moviename)}`; // Redirect to dashboard with movie name
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("Error occurred while searching");
+            });
+            
+        }
+
+        // Add event listeners to all images with the class 'clickable-image'
+        document.querySelectorAll('.gallery img').forEach(img => {
+            img.addEventListener('click', handleImageClick);
+        });
+
+
+    </script>
+
+</body>
+
+
+</html>
