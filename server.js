@@ -28,7 +28,9 @@ app.get('/dashboard', (req, res) => {
     res.render('dashboard', { username });
 });
 app.get('/search', (req, res) => {
+    
     const { moviename } = req.query;
+    // console.log(moviename);
     if (!moviename) {
         return res.status(400).send('Bad Request');
     }
@@ -47,7 +49,7 @@ app.get('/', (req, res) => {
 });
 
 app.listen(8080, () => {
-    console.log('Server is listening on port 8080');
+    console.log('server is running on http://localhost:8080');
 });
 
 app.post('/api/users/login', (req, res) => {
@@ -82,7 +84,7 @@ app.post('/api/users', (req, res) => {
 
 app.post('/search', (req, res) => {
     const { moviename } = req.body;
-    
+    // console.log(moviename+"hi");
     if (moviename){
         res.status(201).json({ message: "User added successfully", moviename: moviename });
     }

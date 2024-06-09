@@ -47,10 +47,30 @@
     </div>
     <script>
         document.getElementById("search").addEventListener("click", () => {
-    const movieName = document.getElementById("moviename").value;
-    
-    
-});
+            const movieName = document.getElementById("moviename").value;
+            
+            fetch('/search', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ moviename: movieName }),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to search');
+                }
+                return response.json();
+            })
+            .then(data => {
+                window.location.href = `/search?moviename=${encodeURIComponent(data.moviename)}`; // Redirect to dashboard with movie name
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("Error occurred while searching");
+            });
+        });
+
     // Function to handle image click
         function handleImageClick(event) {
             const altText = event.target.alt;
